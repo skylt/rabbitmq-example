@@ -13,11 +13,12 @@ def rabbitmq_login(user, password):
     return pika.BlockingConnection(parameters)
 
 if __name__ == "__main__":
-    print(os.environ)
     connection = rabbitmq_login(os.environ["RABBITMQ_DEFAULT_USER"],os.environ["RABBITMQ_DEFAULT_PASS"])
+
     channel = connection.channel()
     channel.queue_declare(queue='hello')
     body = 'Hello !'
+
     while True:
         channel.basic_publish(exchange='',
                       routing_key='hello',
