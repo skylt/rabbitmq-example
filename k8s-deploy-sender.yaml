@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-example-sender
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: rabbitmq-example-sender
+  template:
+    metadata:
+      labels:
+        name: rabbitmq-example-sender
+    spec:
+      containers:
+        - name: sender
+          image: "skylt/rabbitmq-example-sender"
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+          envFrom:
+            - secretRef:
+                name: "example-rabbitmq"

@@ -1,0 +1,6 @@
+apiVersion: rabbitmq.lse.epita.fr/v1alpha1
+kind: Rabbitmq
+metadata:
+  name: example
+spec:
+  replicas: 2
